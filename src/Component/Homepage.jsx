@@ -1,11 +1,14 @@
 import React from 'react'
 import Albums from './Albums';
+import { Spinner } from "react-bootstrap"
+import { Link } from "react-router-dom"
 
 class Homepage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            playlists: []
+            playlists: [],
+            isFetching: true
         };
     }
 
@@ -18,19 +21,22 @@ class Homepage extends React.Component {
             }
         }
 
-        const loadArtist = (artist) => {
-            fetch("https://deezerdevs-deezer.p.rapidapi.com/search?q=" + artist, options)
-                .then((response) => response.json())
-                .then((responseObject) =>
-                    this.setState({ playlists: this.state.playlists.concat([responseObject.data.slice(0, 4)]) })
-                )
+        const loadArtist = async (artist) => {
+            const artistRawData = await fetch("https://deezerdevs-deezer.p.rapidapi.com/search?q=" + artist, options)
+            const artistaData = await artistRawData.json()
+            this.setState(
+                { playlists: this.state.playlists.concat([artistaData.data.slice(0, 4)]) }
+            )        
         }
 
         Promise.all([
             loadArtist("Eminem"),
             loadArtist("Metallica"),
             loadArtist("Madonna"),
-            loadArtist("Behemoth")
+            loadArtist("Behemoth"),
+            this.setState({
+                isFetching: false
+            })
         ])
     }
 
@@ -38,8 +44,17 @@ class Homepage extends React.Component {
 
         return (
             <>
-            <h1>{this.state.artist}</h1>
-            {this.state.playlists.map(playlist => playlist.map(song => <Albums music={song} />))}
+            {this.state.isFetching 
+            ? 
+            <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner>
+            :
+            this.state.playlists.map(playlist => playlist.map(song => 
+            <Link>
+                <Albums music={song} />
+            </Link>
+            ))}
             </>
         )
     }

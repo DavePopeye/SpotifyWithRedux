@@ -4,20 +4,28 @@ import Sidebar from './Component/Sidebar'
 import Upperbar from './Component/Upperbar';
 import Homepage from './Component/Homepage'
 import { Row, Col } from "react-bootstrap"
+import { BrowserRouter as Router , Switch, Route } from "react-router-dom"
+import AlbumPage from './Component/AlbumPage';
 
 function App() {
   return (
-    <div className="App">
-      <Row>
-        <Col xs={3}>
-          <Sidebar />
-        </Col>
-        <Col xs={9}>
-          <Upperbar />
-          <Homepage />
-        </Col>
-      </Row>      
-    </div>
+    <Router>
+      <div className="App">
+        <Row>
+          <Col xs={2}>
+            <Sidebar />
+          </Col>
+          <Col xs={10}>
+            <Upperbar />
+            <Switch>
+              <Route exact path="/" component={Homepage} />
+              <Router exact path="/:id" componet={AlbumPage} />
+            </Switch>
+          </Col>
+        </Row>      
+      </div>
+    </Router>
+    
   );
 }
 
