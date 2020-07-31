@@ -19,7 +19,7 @@ function App() {
             <Upperbar />
             <Switch>
               <Route exact path="/" component={Homepage} />
-              <Router exact path="/:id" componet={AlbumPage} />
+              <Route exact path="/album" componet={AlbumPage} />
             </Switch>
           </Col>
         </Row>      
