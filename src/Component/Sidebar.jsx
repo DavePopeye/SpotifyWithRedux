@@ -1,8 +1,6 @@
 import React from 'react'
 import { Col, Nav } from 'react-bootstrap'
 
-
-
 class Sidebar extends React.Component {
     render() {
         return (

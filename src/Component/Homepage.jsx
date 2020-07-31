@@ -1,16 +1,11 @@
 import React from 'react'
-import { Col, Row, Image } from 'react-bootstrap'
 import Albums from './Albums';
-
 
 class Homepage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             playlists: []
-            // Eminem: [],
-            // Metallica: [],
-            // Madonna: []
         };
     }
 
@@ -37,23 +32,17 @@ class Homepage extends React.Component {
             loadArtist("Madonna"),
             loadArtist("behemoth")
         ])
-
     }
-
 
     render() {
 
         return (
             <>
-                <h1>{this.state.artist}</h1>
-                {this.state.playlists.map(playlist => playlist.map(song => <Albums music={song} />))}
-                {/* {this.state.Eminem.map(song => <Albums music={song} />)}
-                {this.state.Metallica.map(song => <Albums music={song} />)}
-                {this.state.Madonna.map(song => <Albums music={song} />)} */}
+            <h1>{this.state.artist}</h1>
+            {this.state.playlists.map(playlist => playlist.map(song => <Albums music={song} />))}
             </>
         )
     }
-
 }
 
 

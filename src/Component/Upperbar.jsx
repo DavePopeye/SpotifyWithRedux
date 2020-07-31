@@ -1,7 +1,6 @@
 import React from 'react'
 import { Row } from 'react-bootstrap'
 
-
 class Upperbar extends React.Component {
     render() {
         return (
