@@ -30,7 +30,7 @@ class Homepage extends React.Component {
             loadArtist("Eminem"),
             loadArtist("Metallica"),
             loadArtist("Madonna"),
-            loadArtist("behemoth")
+            loadArtist("Behemoth")
         ])
     }
 
